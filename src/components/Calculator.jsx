@@ -98,6 +98,35 @@ export default function Calculator({ inputs, onChange, onCalculate }) {
           />
         </Field>
 
+        {inputs.rateUnit === 'day' && (
+          <Field
+            label="Expected working days per year"
+            hint={`Annual rate: £${((inputs.rate || 0) * (inputs.workingDays || 260)).toLocaleString()} · Full year = 260 days (52 × 5)`}
+          >
+            <div className="flex items-center gap-2">
+              <input
+                type="number" min="1" max="366" step="1"
+                value={inputs.workingDays}
+                onChange={e => update({ workingDays: parseInt(e.target.value) || 260 })}
+                className="input-field w-28"
+              />
+              <span className="text-sm text-gray-500">days</span>
+              <div className="flex gap-1 ml-auto">
+                {[220, 240, 260].map(d => (
+                  <button
+                    key={d}
+                    type="button"
+                    onClick={() => update({ workingDays: d })}
+                    className={`text-xs px-2 py-1 rounded border transition-colors ${inputs.workingDays === d ? 'bg-orange-500 text-white border-orange-500' : 'bg-white text-gray-500 border-gray-300 hover:border-orange-400'}`}
+                  >
+                    {d}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </Field>
+        )}
+
         {inputs.rateUnit === 'hour' && (
           <Field label="Hours per week" hint="Used to annualise your hourly rate">
             <input

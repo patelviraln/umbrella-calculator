@@ -1,12 +1,12 @@
 // UK Umbrella Contractor Pay Waterfall Calculator
 
-export function annualise(amount, unit, hoursPerWeek = 40) {
+export function annualise(amount, unit, hoursPerWeek = 40, workingDays = 260) {
   const n = parseFloat(amount) || 0
   switch (unit) {
     case 'year':  return n
     case 'month': return n * 12
     case 'week':  return n * 52
-    case 'day':   return n * 260
+    case 'day':   return n * workingDays
     case 'hour':  return n * hoursPerWeek * 52
     default:      return n
   }

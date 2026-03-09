@@ -11,6 +11,7 @@ const DEFAULT_INPUTS = {
   rate: 500,
   rateUnit: 'day',
   hoursPerWeek: 40,
+  workingDays: 260,
   taxYear: '2024/25',
   taxCode: '1257L',
   niCategory: 'A',
@@ -53,8 +54,8 @@ export default function App() {
       return
     }
 
-    const annualRate = annualise(inputs.rate, inputs.rateUnit, inputs.hoursPerWeek)
-    const annualMargin = annualise(inputs.umbrellaMargin, inputs.umbrellaMarginUnit, inputs.hoursPerWeek)
+    const annualRate = annualise(inputs.rate, inputs.rateUnit, inputs.hoursPerWeek, inputs.workingDays)
+    const annualMargin = annualise(inputs.umbrellaMargin, inputs.umbrellaMarginUnit, inputs.hoursPerWeek, inputs.workingDays)
 
     const calcInputs = {
       ...inputs,
