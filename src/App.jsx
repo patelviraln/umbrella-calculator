@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { Calculator as CalcIcon } from 'lucide-react'
+import { Calculator as CalcIcon, RotateCcw } from 'lucide-react'
 import { TAX_YEARS } from './utils/taxRates'
 import { calculateUmbrella, annualise } from './utils/taxCalculations'
 import { useHistory } from './hooks/useHistory'
@@ -79,6 +79,13 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }, [])
 
+  const handleReset = useCallback(() => {
+    setInputs(DEFAULT_INPUTS)
+    setResults(null)
+    setError(null)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [])
+
   return (
     <div className="min-h-screen">
       {/* Header */}
@@ -87,10 +94,17 @@ export default function App() {
           <div className="bg-white/20 rounded-xl p-2">
             <CalcIcon size={22} className="text-white" />
           </div>
-          <div>
+          <div className="flex-1">
             <h1 className="text-white font-bold text-lg leading-tight">Umbrella Contractor Calculator</h1>
             <p className="text-orange-100 text-xs">UK take-home pay estimator with history</p>
           </div>
+          <button
+            onClick={handleReset}
+            className="flex items-center gap-1.5 bg-white/15 hover:bg-white/25 text-white text-sm px-3 py-1.5 rounded-lg transition-colors"
+          >
+            <RotateCcw size={14} />
+            Reset
+          </button>
         </div>
       </header>
 
